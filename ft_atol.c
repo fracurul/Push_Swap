@@ -11,15 +11,17 @@
 /* ************************************************************************** */
 
 /**
- * @brief fuctions that convert
- *
+ * @brief converts parameters into long int type.
+ * 
+ * @param str 
+ * @return long int return value.
  */
 
-long	ft_atol(const char *str)
+long int	ft_atol(const char *str)
 {
 	int		i;
 	int		sign;
-	long	result;
+	long int	result;
 
 	i = 0;
 	sign = 1;
@@ -36,5 +38,5 @@ long	ft_atol(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (result *sign);
+	return (result * (long int)sign);
 }
