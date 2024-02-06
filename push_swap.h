@@ -14,7 +14,11 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
-
+# include <limits.h>
+# include "libft/libft.h"
+# include "libft/ft_printf.h"
+# include "libft/get_next_line.h"
+# include "libft/get_next_line_bonus.h"
 typedef struct t_node
 {
 	int				value;
@@ -44,4 +48,6 @@ void				rrb_mov(t_stack *stack_b);
 void				ss_mov(t_stack *stack_a, t_stack *stack_b);
 void				rr_mov(t_stack *stack_a, t_stack *stack_b);
 void				rrr_mov(t_stack *stack_a, t_stack *stack_b);
+//utils
+long int	ft_atol(const char *str);
 #endif
