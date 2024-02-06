@@ -22,7 +22,7 @@ void	ss_mov(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	a_swap = stack_a->head;
 	stack_a->head = stack_a->head->next;
-	stack_a->head->next = swap;
+	stack_a->head->next = a_swap;
 	a_swap->next = NULL;
 	b_swap = stack_b->head;
 	stack_b->head = stack_b->head->next;
