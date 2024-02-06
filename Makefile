@@ -16,7 +16,8 @@
 #                LIB NAME               #
 #########################################
 
-NAME = push_swap.a
+PUSH_SWAP = push_swap.a
+LIBFT = libft/libft.a
 
 #########################################
 #              COMPILATOR               #
@@ -61,16 +62,16 @@ CLEAN = rm -rf
 #              COMPILE ALL              #
 #########################################
 
-all: $(NAME)
-$(NAME) : $(OBJ)
-	@$(AR) $(NAME) $(OBJ)
+all: $(PUSH_SWAP) $(LIBFT)
+$(PUSH_SWAP) : $(OBJ)
+	@$(AR) $(PUSH_SWAP) $(OBJ) $(LIBFT)
 
 #########################################
 #             COMPILE BONUS             #
 #########################################
 
 bonus :$(OBJBONUS)
-	@$(AR) $(NAME) $(OBJBONUS)
+	@$(AR) $(PUSH_SWAP) $(OBJBONUS) $(LIBFT)
 
 #########################################
 #           COMPILE .c to .o            #
