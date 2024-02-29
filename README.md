@@ -1,3 +1,5 @@
 # Push_Swap
 
-1.añadir header a funcion ft_strcmp en libft y pushswap.
+Dividido los movimientos en funcion a la accion que realizan, se han añadido el nombre de los mov a la hora de realizarlos.
+
+// probar movimientos (hacer un main) // implementar algoritmo
