@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 20:42:49 by fracurul          #+#    #+#             */
-/*   Updated: 2023/12/20 20:42:51 by fracurul         ###   ########.fr       */
+/*   Created: 2024/02/15 17:18:17 by fracurul          #+#    #+#             */
+/*   Updated: 2024/02/15 17:21:25 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
