@@ -6,12 +6,11 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:24 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:12:18 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:27:55 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	ft_push(t_stack *stack_a, t_stack *stack_b)
 {

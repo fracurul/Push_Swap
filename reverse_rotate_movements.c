@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 19:05:46 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:19:51 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:53:06 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rra_mov(t_stack *stack_a)
 	write(1, "rra\n", 4);
 }
 
-void	rrb_mov(t_stack *stack_a)
+void	rrb_mov(t_stack *stack_b)
 {
 	ft_rrotation(stack_b);
 	write(1, "rrb\n", 4);
