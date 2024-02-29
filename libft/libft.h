@@ -6,8 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:26:22 by fracurul          #+#    #+#             */
-/*   Updated: 2023/10/01 21:20:46 by fracurul         ###   ########.fr       */
-/*   Updated: 2023/10/01 21:20:46 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:14:31 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +70,3 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 #endif
-
