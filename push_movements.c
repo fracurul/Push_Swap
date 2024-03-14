@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:24 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:27:55 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:47:21 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_push(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*swap;
+	t_node	*push;
 
 	if (!stack_a || !stack_a->head || stack_a->head->next)
 		return ;
-	swap = stack_a->head;
+	push = stack_a->head;
 	stack_a->head = stack_a->head->next;
-	stack_b = swap;
-	swap->next = NULL;
+	stack_b->head = push;
+	push->next = NULL;
 }
 
 void	pa_mov(t_stack *stack_a, t_stack *stack_b)

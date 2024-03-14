@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_checker.c                                  :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:24:40 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:36:01 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:57:17 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
  * @param str
  * @return long int return value.
  */
-long int	ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	int			i;
 	int			sign;
-	long int	result;
+	long		result;
 
 	i = 0;
 	sign = 1;
+	result = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -34,12 +35,12 @@ long int	ft_atol(const char *str)
 			sign *= -1;
 		i++;
 	}
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 	{
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (result * (long int)sign);
+	return (result * sign);
 }
 
 /**
@@ -56,8 +57,7 @@ int	ft_isnbr(char *s)
 	if (s[i] && (s[i] == '+' || s[i] == '-'))
 		i++;
 	if (!ft_isdigit(s[i]))
-		;
-	return (0);
+		return (0);
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
@@ -103,7 +103,7 @@ int	ft_isdup(char **argv)
 	{
 		while (argv[j])
 		{
-			if (ft_nbrcmp(argv[i++], argv[j++] == 0))
+			if (ft_nbrcmp(argv[i++], argv[j++]) == 0)
 				return (0);
 		}
 	}

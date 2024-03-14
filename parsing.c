@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:31:48 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:25:55 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:54:58 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 int	ft_parse_checker(int argc, char **argv)
 {
-	char	*parsed_value;
+	int		*parsed_value;
 	int		i;
 
 	i = 0;
@@ -29,10 +29,10 @@ int	ft_parse_checker(int argc, char **argv)
 		return(free(parsed_value), 0);
 	while (++i < argc)
 	{
-		if(!ft_isnbr(parsed_value))
+		if(!ft_isnbr(argv[i]))
 			return (free(parsed_value), 0);
 	}
-	if (!ft_isdup(parsed_value))
+	if (!ft_isdup(argv))
 		return (free(parsed_value), 0);
 	return (free(parsed_value), 1);
 }
@@ -85,20 +85,20 @@ int	*ft_parsing(int argc, char **argv)
 	int	*values;
 	int	j;
 
-	i = 0;
+	i = argc;
 	j = 0;
 	size = 0;
-	while (argv[size][0])
+	while (argv[size])
 		size++;
 	values = (int *)malloc(size * sizeof(int));
 	if (!values)
 		return (values);
-	while (argc < size)
+	while (i < size)
 	{
-		if (ft_atol(argv[argc]) < INT_MIN || ft_atol(argv[argc]) > INT_MAX)
+		if (ft_atol(argv[i]) > INT_MIN || ft_atol(argv[i]) < INT_MAX)
 			return (free(values), NULL);
 		else
-			values[i++] = (int *)ft_atol(argv[argc++]);
+			values[i++] = (int)ft_atol(argv[j++]);
 	}
 	return (values);
 }
