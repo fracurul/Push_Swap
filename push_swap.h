@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:04 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/29 19:19:11 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:24:44 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,44 @@ typedef struct t_stack
 	int				size;
 }					t_stack;
 
-// movements//
-// swap_movements
-void				ft_swap(t_stack *stack_a);
+// movements //
+//-> swap_movements.
+void				ft_swap_nodes(t_stack *stack_a);
 void				sa_mov(t_stack *stack_a);
 void				sb_mov(t_stack *stack_b);
 void				ss_mov(t_stack *stack_a, t_stack *stack_b);
-// push_movements
+//-> push_movements.
 void				ft_push(t_stack *stack_a, t_stack *stack_b);
 void				pa_mov(t_stack *stack_a, t_stack *stack_b);
 void				pb_mov(t_stack *stack_a, t_stack *stack_b);
-// rotation_movements
+//-> rotation_movements.
 void				ft_rotate(t_stack *stack_a);
 void				ra_mov(t_stack *stack_a);
 void				rb_mov(t_stack *stack_b);
 void				rr_mov(t_stack *stack_a, t_stack *stack_b);
-// reverse_rotations_movements
+//-> reverse_rotations_movements.
 void				ft_rrotation(t_stack *stack_a);
 void				rra_mov(t_stack *stack_a);
 void				rrb_mov(t_stack *stack_b);
 void				rrr_mov(t_stack *stack_a, t_stack *stack_b);
-//utils
-long int			ft_atol(const char *str);
+// parsing //
+int					ft_parse_checker(int argc, char **argv);
+int					ft_split_checker(int argc, char **argv);
+int					*ft_parsing(int argc, char **argv);
+// utils //
+//-> parsing utils.
+long				ft_atol(const char *str);
+int					ft_isnbr(char *s);
+int					ft_nbrcmp(const char *s1, const char *s2);
+int					ft_isdup(char **argv);
+void				ft_del_matrix(char **str);
+//-> node utils.
+t_node				*create_node(int value);
+void				node_to_head(t_stack *stack, t_node *node);
+void				node_to_tail(t_stack *stack, t_node *node);
+void				delete_node(t_node *node);
+//-> stack utils.
+void				stack_init(t_stack *stack);
+void				stack_fill(t_stack *stack, int *parsing, int size);
+void				delete_stack(t_stack *stack);
 #endif
