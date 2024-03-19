@@ -23,9 +23,9 @@ void	stack_init(t_stack *stack)
 	stack->size = 0;
 }
 /**
- * @brief fill the stack with the number we recieve
+ * @brief fill the stack with the number we recieve.
  *
- * @param stack to be fill
+ * @param stack to be fill.
  * @param parsing value content to fill.
  * @param size number of values we've.
  */
@@ -39,7 +39,11 @@ void	stack_fill(t_stack *stack, int *parsing, int size)
 		node_to_tail(stack, create_node(parsing[i++]));
 	}
 }
-
+/**
+ * @brief delete stack.
+ * 
+ * @param stack 
+ */
 void	delete_stack(t_stack *stack)
 {
 	t_node	*current;
@@ -55,4 +59,24 @@ void	delete_stack(t_stack *stack)
 		current = aux;
 	}
 	stack->head = NULL;
+}
+/**
+ * @brief get stack size.
+ * 
+ * @param stack 
+ * @return int size of the stack.
+ */
+int	stack_size(t_stack *stack)
+{
+	int	size;
+
+	size = 0;
+	if (!stack)
+		return (0);
+	while(stack)
+	{
+		stack->head = stack->head->next;
+		size++;
+	}
+	return (size);
 }
