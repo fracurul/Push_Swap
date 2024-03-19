@@ -23,8 +23,11 @@
 typedef struct t_node
 {
 	int				value;
-	int				a_mov;
-	int				b_mov;
+	int				max_value;
+	int				push_cost;
+	int				median;
+	int				cheapest;
+	struct t_node	*target_node;
 	struct t_node	*next;
 }					t_node;
 
@@ -36,7 +39,7 @@ typedef struct t_stack
 
 // movements //
 //-> swap_movements.
-void				ft_swap_nodes(t_stack *stack_a);
+void				ft_swap(t_stack *stack);
 void				sa_mov(t_stack *stack_a);
 void				sb_mov(t_stack *stack_b);
 void				ss_mov(t_stack *stack_a, t_stack *stack_b);
@@ -74,4 +77,14 @@ void				delete_node(t_node *node);
 void				stack_init(t_stack *stack);
 void				stack_fill(t_stack *stack, int *parsing, int size);
 void				delete_stack(t_stack *stack);
+int					get_max_value(t_stack *stack);
+int					stack_size(t_stack *stack);
+// algorithm //
+int					is_sorted(t_stack *stack);
+void				sort3(t_stack **stack);
+t_node				*find_max(t_stack *stack);
+void				set_target(t_stack *stack_a, t_stack *stack_b);
+void				cost_analysis(t_stack *stack_a, t_stack *stack_b);
+void				set_cheapest(t_stack *stack);
+
 #endif
