@@ -1,31 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
+/*   Updated: 2024/03/21 20:15:36 by fracurul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 /**
- * @brief Get the max value object.
- * 
- * @param stack 
- * @return int with the max value.
- */
-int	get_max_value(t_stack *stack)
-{
-	int		max_value;
-	t_node *current;
-
-	current = stack->head;
-	max_value = current->max_value;
-	while(!current)
-	{
-		if(current->max_value > max_value)
-			max_value = current->max_value;
-		current = current->next;
-	}
-	return (max_value);
-}
-/**
  * @brief looks for the median value in the stack
- * 
- * @param stack 
+ *
+ * @param stack
  */
 void	current_median(t_stack *stack)
 {
@@ -43,41 +33,17 @@ void	current_median(t_stack *stack)
 			stack->head->median = 1;
 		else
 			stack->head->median = 0;
-		stack->head = stack->head->next->value;
-	}
-}
-/**
- * @brief find the max value. 
- * 
- * @param stack 
- * @return t_stack 
- */
-t_node	*find_max(t_stack *stack)
-{
-	int		max;
-	t_node	*max_node;
-	
-	if (!stack)
-		return (NULL);
-	max = INT_MAX;
-	while (stack->head)
-	{
-		if (stack->head->value < max)
-		{
-			max = stack->head->value;
-			max_node = max;
-		}
 		stack->head = stack->head->next;
+		i++;
 	}
-	return (max_node);
 }
 /**
  * @brief Set the target object to a from stack_b.
- * 
- * @param stack_a 
- * @param stack_b 
+ *
+ * @param stack_a
+ * @param stack_b
  */
-void	set_target(t_stack *stack_a, t_stack *stack_b)
+void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*current_b;
 	t_stack	*target;
@@ -106,9 +72,9 @@ void	set_target(t_stack *stack_a, t_stack *stack_b)
 }
 /**
  * @brief calculate pus_cost for each stack_a node.
- * 
- * @param stack_a 
- * @param stack_b 
+ *
+ * @param stack_a
+ * @param stack_b
  */
 void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 {
@@ -127,5 +93,48 @@ void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 		else
 			stack_a->head->push_cost += size_b - (stack_a->head->target_node->max_value);
 		stack_a->head = stack_a->head->next;
+	}
+}
+/**
+ * @brief looks for the node with the cheapest push_cost
+ * and put cheapest node at true.
+ *
+ * @param stack
+ */
+void	set_cheapest(t_stack *stack)
+{
+	int	cheapest_value;
+	t_stack	*cheapest_stack;
+
+	if (!stack->head)
+		return ;
+	cheapest_value = INT_MIN;
+	while (stack->head)
+	{
+		if (stack->head->push_cost > cheapest_value)
+		{
+			cheapest_value = stack->head->push_cost;
+			cheapest_stack = stack;
+		}
+		stack->head = stack->head->next;
+	}
+	cheapest_stack->head->cheapest = 1;
+}
+
+void	get_node_push(t_stack **stack, t_stack *top_node, char *name)
+{
+	if (name == "stack_a")
+	{
+		if (top_node->head->median)
+			ra_mov(stack);
+		else
+			rra_mov(stack);
+	}
+	else if (name == "stack_b")
+	{
+		if (top_node->head->median)
+			rb_mov(stack);
+		else
+			rrb_mov(stack);
 	}
 }
