@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:33 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/14 20:23:28 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:02:12 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	stack_fill(t_stack *stack, int *parsing, int size)
 }
 /**
  * @brief delete stack.
- * 
- * @param stack 
+ *
+ * @param stack
  */
 void	delete_stack(t_stack *stack)
 {
@@ -62,8 +62,8 @@ void	delete_stack(t_stack *stack)
 }
 /**
  * @brief get stack size.
- * 
- * @param stack 
+ *
+ * @param stack
  * @return int size of the stack.
  */
 int	stack_size(t_stack *stack)
@@ -79,4 +79,29 @@ int	stack_size(t_stack *stack)
 		size++;
 	}
 	return (size);
+}
+/**
+ * @brief find the max value.
+ *
+ * @param stack
+ * @return t_stack
+ */
+t_node	*find_max(t_stack *stack)
+{
+	int		max;
+	t_node	*max_node;
+
+	if (!stack)
+		return (NULL);
+	max = INT_MIN;
+	while (stack->head)
+	{
+		if (stack->head->value > max)
+		{
+			max = stack->head->value;
+			max_node = max;
+		}
+		stack->head = stack->head->next;
+	}
+	return (max_node);
 }
