@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 19:58:43 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/13 13:24:37 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:25:25 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 void	ft_rotate(t_stack *stack)
 {
-	t_node	*swap;
 	t_node	*rotation;
+	t_node	*aux;
 
 	if (!stack || !stack->head || !stack->head->next)
 		return ;
-	swap = stack->head;
 	rotation = stack->head;
-	while (rotation->next)
-		rotation = rotation->next;
-	rotation->next = swap;
-	swap->next = NULL;
+	stack->head = stack->head->next;
+	aux = stack->head->next;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = rotation;
+	rotation->next = NULL;
 }
 
 void	ra_mov(t_stack *stack_a)
 {
+
 	ft_rotate(stack_a);
 	write(1, "ra\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:26:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/02/15 17:14:31 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:33:12 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "get_next_line.h"
 
 int					ft_isalpha(int c);
-int					ft_isdigit(int c);
+int					ft_isdigit(char c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:22:31 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/21 20:51:17 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:23:11 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 	if (match == INT_MAX)
 		stack_b->head->target_node = find_min(stack_a);
 	else
-		stack_b->head->target_node = target;
-	stack_b = stack_b->head->next;
+		stack_b->head->target_node = target->head;
+	stack_b->head = stack_b->head->next;
+}
+
+int	matrix_size(char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+		;
+	return (i);
 }

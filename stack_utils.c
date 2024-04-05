@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:33 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/21 19:02:12 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:28:59 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ void	stack_init(t_stack *stack)
  * @param parsing value content to fill.
  * @param size number of values we've.
  */
-void	stack_fill(t_stack *stack, int *parsing, int size)
+void	 stack_fill(t_stack *stack, int *parsing, int size)
 {
-	int i;
+	int	i;
 
-	i = 1;
-	while(i < size)
-	{
-		node_to_tail(stack, create_node(parsing[i++]));
-	}
+	i = -1;
+	while(++i < size)
+		node_to_tail(stack, create_node(parsing[i]));
 }
 /**
  * @brief delete stack.
@@ -68,14 +66,16 @@ void	delete_stack(t_stack *stack)
  */
 int	stack_size(t_stack *stack)
 {
+	t_node	*aux;
 	int	size;
 
 	size = 0;
+	aux = stack->head;
 	if (!stack)
 		return (0);
-	while(stack)
+	while(stack && aux->next)
 	{
-		stack->head = stack->head->next;
+		aux = aux->next;
 		size++;
 	}
 	return (size);
@@ -99,9 +99,9 @@ t_node	*find_max(t_stack *stack)
 		if (stack->head->value > max)
 		{
 			max = stack->head->value;
-			max_node = max;
+			max_node = stack->head;
 		}
-		stack->head = stack->head->next;
+		stack->head = stack->head;
 	}
 	return (max_node);
 }

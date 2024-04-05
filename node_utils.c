@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:43:19 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/14 20:33:16 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:40 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_node	*create_node(int value)
 	if (!new)
 		return (NULL);
 	new->value = value;
+	new->max_value = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -38,14 +39,14 @@ t_node	*create_node(int value)
  */
 void	node_to_head(t_stack *stack, t_node *node)
 {
-	t_node *aux;
-
-	if (!stack || !node)
+	if(!node || !stack)
 		return ;
-	aux = stack->head;
-	stack->head = node;
-	stack->head->next = aux;
-	stack->size++;
+	if (!stack->head)
+			stack->head = node;
+	else
+		node->next = stack->head;
+		stack->head = node;
+		stack->size++;
 }
 
 /**
@@ -58,13 +59,17 @@ void	node_to_tail(t_stack *stack, t_node *node)
 {
 	t_node *aux;
 
-	if (!stack || !node)
+	if(!node || !stack)
 		return ;
-	aux = stack->head;
-	while (aux->next)
-		aux = aux->next;
-	aux->next = node;
-	node->next = NULL;
+	if (stack->head == NULL)
+		stack->head = node;
+	else
+	{
+		aux = stack->head;
+		while (aux->next)
+			aux = aux->next;
+		aux->next = node;
+	}
 	stack->size++;
 }
 

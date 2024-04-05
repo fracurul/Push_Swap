@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/21 20:15:36 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:55:39 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 			if (current_b->head->value < stack_a->head->value
 				&& current_b->head->value > match)
 			{
-				match - current_b->head->value;
+				match = current_b->head->value;
 				target = current_b;
 			}
-			current_b = current_b->head->next;
+			current_b->head = current_b->head->next;
 		}
 		if (match == INT_MIN)
 			stack_a->head->target_node = find_max(stack_b);
 		else
-			stack_a->head->target_node = target;
+			stack_a->head->target_node = target->head;
 		stack_a->head = stack_a->head->next;
 	}
 }
@@ -121,20 +121,20 @@ void	set_cheapest(t_stack *stack)
 	cheapest_stack->head->cheapest = 1;
 }
 
-void	get_node_push(t_stack **stack, t_stack *top_node, char *name)
+void	get_node_push(t_stack **stack, t_node *top_node, char *name)
 {
-	if (name == "stack_a")
+	if (ft_strcmp(name, "stack_a"))
 	{
-		if (top_node->head->median)
-			ra_mov(stack);
+		if (top_node->median)
+			ra_mov(*stack);
 		else
-			rra_mov(stack);
+			rra_mov(*stack);
 	}
-	else if (name == "stack_b")
+	else if (ft_strcmp(name, "stack_b"))
 	{
-		if (top_node->head->median)
-			rb_mov(stack);
+		if (top_node->median)
+			rb_mov(*stack);
 		else
-			rrb_mov(stack);
+			rrb_mov(*stack);
 	}
 }
