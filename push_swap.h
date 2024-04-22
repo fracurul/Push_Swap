@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:04 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/03 19:14:56 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:14:42 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct t_node
 	int				value;
 	int				max_value;
 	int				push_cost;
-	int				median;
+	int				abv_avg;
 	int				cheapest;
 	struct t_node	*target_node;
 	struct t_node	*next;
@@ -39,25 +39,25 @@ typedef struct t_stack
 
 // movements //
 //-> swap_movements.
-void				ft_swap(t_stack *stack);
-void				sa_mov(t_stack *stack_a);
-void				sb_mov(t_stack *stack_b);
-void				ss_mov(t_stack *stack_a, t_stack *stack_b);
+void				ft_swap(t_stack **stack);
+void				sa_mov(t_stack **stack_a);
+void				sb_mov(t_stack **stack_b);
+void				ss_mov(t_stack **stack_a, t_stack **stack_b);
 //-> push_movements.
-void				ft_push(t_stack *stack_a, t_stack *stack_b);
-void				pa_mov(t_stack *stack_a, t_stack *stack_b);
-void				pb_mov(t_stack *stack_a, t_stack *stack_b);
+void				ft_push(t_stack **stack_a, t_stack **stack_b);
+void				pa_mov(t_stack **stack_a, t_stack **stack_b);
+void				pb_mov(t_stack **stack_a, t_stack **stack_b);
 //-> rotation_movements.
-void				ft_rotate(t_stack *stack_a);
-void				ra_mov(t_stack *stack_a);
-void				rb_mov(t_stack *stack_b);
-void				rr_mov(t_stack *stack_a, t_stack *stack_b);
+void				ft_rotate(t_stack **stack_a);
+void				ra_mov(t_stack **stack_a);
+void				rb_mov(t_stack **stack_b);
+void				rr_mov(t_stack **stack_a, t_stack **stack_b);
 void				r_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest);
 //-> reverse_rotations_movements.
-void				ft_rrotation(t_stack *stack_a);
-void				rra_mov(t_stack *stack_a);
-void				rrb_mov(t_stack *stack_b);
-void				rrr_mov(t_stack *stack_a, t_stack *stack_b);
+void				ft_rrotation(t_stack **stack_a);
+void				rra_mov(t_stack **stack_a);
+void				rrb_mov(t_stack **stack_b);
+void				rrr_mov(t_stack **stack_a, t_stack **stack_b);
 void				rr_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest);
 // parsing //
 int					ft_parse_checker(int argc, char **argv);
@@ -83,13 +83,13 @@ int					get_max_value(t_stack *stack);
 t_node				*get_cheapest(t_stack *stack);
 int					stack_size(t_stack *stack);
 //->algorithm utils
-void				current_median(t_stack *stack);
+void				current_average(t_stack *stack);
 void				set_target_a(t_stack *stack_a, t_stack *stack_b);
 t_node				*find_max(t_stack *stack);
 t_node				*find_min(t_stack *stack);
 void				cost_analysis(t_stack *stack_a, t_stack *stack_b);
 void				set_cheapest(t_stack *stack);
-void				get_node_push(t_stack **stack, t_node *top_node, char *name);
+void				get_node_push(t_stack **stack, t_node *top_node, int n);
 void				move_to_b(t_stack **stack_a, t_stack **stack_b);
 void				move_to_a(t_stack **stack_a, t_stack **stack_b);
 void				min_to_top(t_stack **stack_a);
@@ -101,5 +101,5 @@ int					matrix_size(char **argv);
 int					is_sorted(t_stack *stack);
 void				sort3(t_stack **stack);
 void				sort_stacks(t_stack **stack_a, t_stack **stack_b);
-void			print_stack(t_node *current);
+void				print_stack(t_node *current);
 #endif

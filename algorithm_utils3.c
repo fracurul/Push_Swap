@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:22:31 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/01 16:23:11 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:38:13 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 {
-	t_stack	*current_a;
-	t_stack	*target;
+	t_node	*current_a;
+	t_node	*target;
+	t_node	*aux_b;
 	int		match;
 
-	match = INT_MAX;
-	current_a = stack_a;
-	while (stack_b)
+	aux_b = stack_b->head;
+	while (aux_b)
 	{
-		while (current_a->head)
+		match = INT_MAX;
+		current_a = stack_a->head;
+		while (current_a->next)
 		{
-			if (current_a->head->value > stack_b->head->value
-				&& current_a->head->value < match)
+			if (current_a->value > aux_b->value
+				&& current_a->value < match)
 			{
-				match = current_a->head->value;
+				match = current_a->value;
 				target = current_a;
 			}
-			current_a->head = current_a->head->next;
+			current_a = current_a->next;
 		}
+		aux_b->target_node = target;
+		aux_b = aux_b->next;
 	}
-	if (match == INT_MAX)
-		stack_b->head->target_node = find_min(stack_a);
-	else
-		stack_b->head->target_node = target->head;
-	stack_b->head = stack_b->head->next;
 }
 
 int	matrix_size(char **argv)

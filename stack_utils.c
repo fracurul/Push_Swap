@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:33 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/03 17:28:59 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:49:36 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,20 @@ t_node	*find_max(t_stack *stack)
 {
 	int		max;
 	t_node	*max_node;
+	t_node	*aux;
 
 	if (!stack)
 		return (NULL);
 	max = INT_MIN;
-	while (stack->head)
+	aux = stack->head;
+	while (aux)
 	{
-		if (stack->head->value > max)
+		if (aux->value > max)
 		{
-			max = stack->head->value;
-			max_node = stack->head;
+			max = aux->value;
+			max_node = aux;
 		}
-		stack->head = stack->head;
+		aux = aux->next;
 	}
 	return (max_node);
 }

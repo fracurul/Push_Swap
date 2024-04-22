@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:16 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/05 13:33:47 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:36:06 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,34 @@ void	sort3(t_stack **stack)
 
 	current = get_max_value(*stack);
 	if (current == (*stack)->head->value)
-		ra_mov(*stack);
+		ra_mov(stack);
 	if ((*stack)->head->next->value == current)
-		rra_mov(*stack);
+		rra_mov(stack);
 	if ((*stack)->head->value > (*stack)->head->next->value)
-		sa_mov(*stack);
+		sa_mov(stack);
 }
 
 void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 {
-	int size_a;
 
-	size_a = (*stack_a)->size;
-	if(size_a-- > 3 && is_sorted(*stack_a))
-		pb_mov(*stack_a, *stack_b);
-	if(size_a-- > 3 && is_sorted(*stack_a))
-		pb_mov(*stack_a, *stack_b);
-	while(size_a-- > 3 && is_sorted(*stack_a))
+	if((*stack_a)->size > 3 && !is_sorted(*stack_a))
+		pb_mov(stack_a, stack_b);
+	if((*stack_a)->size > 3 && !is_sorted(*stack_a))
+		pb_mov(stack_a, stack_b);
+	while((*stack_a)->size > 3 && !is_sorted(*stack_a))
 	{
 		nodes_init_a(*stack_a, *stack_b);
 		move_to_b(stack_a, stack_b);
+		ft_printf("%d",(*stack_a)->size);
+		print_stack((*stack_a)->head);
 	}
-	sort3(stack_a);
+	if ((*stack_a)->size == 3)
+		sort3(stack_a);
 	while(*stack_b)
 	{
 		nodes_init_b(*stack_a, *stack_b);
 		move_to_a(stack_a, stack_b);
 	}
-	current_median(*stack_a);
+	current_average(*stack_a);
 	min_to_top(stack_a);
 }

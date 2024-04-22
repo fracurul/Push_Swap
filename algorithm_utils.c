@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/22 20:55:39 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:41:52 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,25 @@
  *
  * @param stack
  */
-void	current_median(t_stack *stack)
+void	current_average(t_stack *stack)
 {
-	int	i;
-	int median;
+	int		i;
+	int		avg;
+	t_node	*aux;
 
 	i = 0;
 	if (!stack)
 		return ;
-	median = stack->size / 2;
-	while (stack->head)
+	aux = stack->head;
+	avg = stack->size / 2;
+	while (aux)
 	{
-		stack->head->max_value = i;
-		if (i <= median)
-			stack->head->median = 1;
+		aux->max_value = i;
+		if (i <= avg)
+			aux->abv_avg = 1;
 		else
-			stack->head->median = 0;
-		stack->head = stack->head->next;
+			aux->abv_avg = 0;
+		aux = aux->next;
 		i++;
 	}
 }
@@ -43,31 +45,30 @@ void	current_median(t_stack *stack)
  * @param stack_a
  * @param stack_b
  */
+
 void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 {
-	t_stack	*current_b;
-	t_stack	*target;
-	int		match;
+	t_node	*current_b;
+	t_node	*aux_a;
+	long	match;
 
-	while (stack_a)
+	aux_a = stack_a->head;
+	while (aux_a)
 	{
-		match = INT_MIN;
-		current_b = stack_b;
+		match = LONG_MIN;
+		current_b = stack_b->head;
 		while (current_b)
 		{
-			if (current_b->head->value < stack_a->head->value
-				&& current_b->head->value > match)
+			if (current_b->value < aux_a->value && current_b->value > (int)match)
 			{
-				match = current_b->head->value;
-				target = current_b;
+				match = current_b->value;
+				aux_a->target_node = current_b;
 			}
-			current_b->head = current_b->head->next;
+			current_b = current_b->next;
 		}
-		if (match == INT_MIN)
-			stack_a->head->target_node = find_max(stack_b);
-		else
-			stack_a->head->target_node = target->head;
-		stack_a->head = stack_a->head->next;
+		if (match < INT_MIN)
+			aux_a->target_node = find_max(stack_b);
+		aux_a = aux_a->next;
 	}
 }
 /**
@@ -76,23 +77,27 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
  * @param stack_a
  * @param stack_b
  */
+
 void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 {
-	int	size_a;
-	int size_b;
+	int		size_a;
+	int		size_b;
+	t_node	*aux_a;
 
 	size_a = stack_a->size;
 	size_b = stack_b->size;
-	while (stack_a->head)
+	aux_a = stack_a->head;
+	while (aux_a)
 	{
-		stack_a->head->push_cost = stack_a->head->max_value;
-		if (!(stack_a->head->median))
-			stack_a->head->push_cost = size_a - (stack_a->head->max_value);
-		if (stack_a->head->target_node->median)
-			stack_a->head->push_cost = stack_a->head->target_node->max_value;
+		aux_a->push_cost = aux_a->max_value;
+		if (!(aux_a->abv_avg))
+			aux_a->push_cost = size_a - (aux_a->max_value);
+		if (aux_a->target_node->abv_avg)
+			aux_a->push_cost = aux_a->target_node->max_value;
 		else
-			stack_a->head->push_cost += size_b - (stack_a->head->target_node->max_value);
-		stack_a->head = stack_a->head->next;
+			aux_a->push_cost += size_a
+				- (aux_a->target_node->max_value);
+		aux_a = aux_a->next;
 	}
 }
 /**
@@ -101,40 +106,43 @@ void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
  *
  * @param stack
  */
+
 void	set_cheapest(t_stack *stack)
 {
-	int	cheapest_value;
-	t_stack	*cheapest_stack;
+	int		cheapest_value;
+	t_node	*cheapest_node;
+	t_node	*aux;
 
-	if (!stack->head)
+	aux = stack->head;
+	if (!aux)
 		return ;
 	cheapest_value = INT_MIN;
-	while (stack->head)
+	while (aux->next)
 	{
-		if (stack->head->push_cost > cheapest_value)
+		if (aux->push_cost > cheapest_value)
 		{
-			cheapest_value = stack->head->push_cost;
-			cheapest_stack = stack;
+			cheapest_value = aux->push_cost;
+			cheapest_node = aux;
 		}
-		stack->head = stack->head->next;
+		aux = aux->next;
 	}
-	cheapest_stack->head->cheapest = 1;
+	cheapest_node->cheapest = 1;
 }
 
-void	get_node_push(t_stack **stack, t_node *top_node, char *name)
+void	get_node_push(t_stack **stack, t_node *top_node, int n)
 {
-	if (ft_strcmp(name, "stack_a"))
+	if (n == 1)
 	{
-		if (top_node->median)
-			ra_mov(*stack);
+		if (top_node->abv_avg)
+			rra_mov(stack);
 		else
-			rra_mov(*stack);
+			rra_mov(stack);
 	}
-	else if (ft_strcmp(name, "stack_b"))
+	else if (n == 2)
 	{
-		if (top_node->median)
-			rb_mov(*stack);
+		if (top_node->abv_avg)
+			rb_mov(stack);
 		else
-			rrb_mov(*stack);
+			rrb_mov(stack);
 	}
 }

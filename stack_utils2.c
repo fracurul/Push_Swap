@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:53:31 by fracurul          #+#    #+#             */
-/*   Updated: 2024/03/22 20:20:16 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:00:56 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,34 @@ t_node	*get_cheapest(t_stack *stack)
 }
 void	r_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest)
 {
-	while ((*stack_b)->head != cheapest->target_node
-		&& (*stack_a)->head != cheapest)
-		rr_mov(*stack_a, *stack_b);
-	current_median(*stack_a);
-	current_median(*stack_b);
+	t_node	*aux_a;
+	t_node	*aux_b;
+
+	aux_a = (*stack_a)->head;
+	aux_b = (*stack_b)->head;
+	while (aux_b != cheapest->target_node && aux_a != cheapest)
+	{
+		rr_mov(stack_a, stack_b);
+		aux_a = aux_a->next;
+		aux_b = aux_b->next;
+	}
+	current_average(*stack_a);
+	current_average(*stack_b);
 }
 
 void	rr_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest)
 {
-	while ((*stack_b)->head != cheapest->target_node
-		&& (*stack_a)->head != cheapest)
-		rrr_mov(*stack_a, *stack_b);
-	current_median(*stack_a);
-	current_median(*stack_b);
+	t_node	*aux_a;
+	t_node	*aux_b;
+
+	aux_a = (*stack_a)->head;
+	aux_b = (*stack_b)->head;
+	while (aux_b != cheapest->target_node && aux_a != cheapest)
+	{
+		rrr_mov(stack_a, stack_b);
+		aux_a = aux_a->next;
+		aux_b = aux_b->next;
+	}
+	current_average(*stack_a);
+	current_average(*stack_b);
 }
