@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:13 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/22 18:32:36 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:35:01 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_stack(t_node *current)
 {
 	while (current)
 	{
-		printf("valor del nodo:%d\n | ", current->value);
+		printf("valor del nodo:%d|\n ", current->value);
 		/*printf("mediana%d |", current->abv_avg);
 		printf("index %d |", current->max_value);
 		printf("coste%d |", current->push_cost);

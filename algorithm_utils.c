@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/22 17:41:52 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:02:34 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	get_node_push(t_stack **stack, t_node *top_node, int n)
 	if (n == 1)
 	{
 		if (top_node->abv_avg)
-			rra_mov(stack);
+			ra_mov(stack);
 		else
 			rra_mov(stack);
 	}

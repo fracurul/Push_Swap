@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:16 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/22 18:36:06 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:44:59 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 	{
 		nodes_init_a(*stack_a, *stack_b);
 		move_to_b(stack_a, stack_b);
-		ft_printf("%d",(*stack_a)->size);
-		print_stack((*stack_a)->head);
 	}
 	if ((*stack_a)->size == 3)
 		sort3(stack_a);
-	while(*stack_b)
+	while((*stack_b)->size)
 	{
 		nodes_init_b(*stack_a, *stack_b);
 		move_to_a(stack_a, stack_b);

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:53:31 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/16 13:00:56 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:11:50 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,37 @@
 
 t_node	*find_min(t_stack *stack)
 {
-	int	min;
-	t_node *min_node;
+	int		min;
+	t_node	*min_node;
+	t_node	*aux;
 
 	if (!stack)
 		return (NULL);
 	min = INT_MAX;
-	while (stack)
+	aux = stack->head;
+	while (aux)
 	{
-		if (stack->head->value < min)
+		if (aux->value < min)
 		{
-			min = stack->head->value;
+			min = aux->value;
 			min_node = stack->head;
 		}
-		stack->head = stack->head->next;
+		aux = aux->next;
 	}
 	return (min_node);
 }
 
 t_node	*get_cheapest(t_stack *stack)
 {
+	t_node *aux;
 	if (!stack)
 		return(NULL);
-	while(stack->head)
+	aux = stack->head;
+	while(aux)
 	{
-		if (stack->head->cheapest)
-			return (stack->head);
-		stack->head = stack->head->next;
+		if (aux->cheapest)
+			return (aux);
+		aux = aux->next;
 	}
 	return (NULL);
 }
