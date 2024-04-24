@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:28 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/22 18:35:35 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:36:25 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	move_to_b(t_stack **stack_a, t_stack **stack_b)
 
 void	move_to_a(t_stack **stack_a, t_stack **stack_b)
 {
-	t_node	*cheapest;
-
-	cheapest = get_cheapest(*stack_b);
-	get_node_push(stack_a, cheapest->target_node, 1);
+	get_node_push(stack_a, (*stack_b)->head->target_node, 1);
 	pa_mov(stack_a, stack_b);
 }
 

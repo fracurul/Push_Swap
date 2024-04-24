@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/23 17:02:34 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:18:32 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 		current_b = stack_b->head;
 		while (current_b)
 		{
-			if (current_b->value < aux_a->value && current_b->value > (int)match)
+			if (current_b->value < aux_a->value && (long)current_b->value > match)
 			{
 				match = current_b->value;
 				aux_a->target_node = current_b;

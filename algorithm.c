@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:16 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/23 17:44:59 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:38:38 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	is_sorted(t_stack *stack)
 {
 	t_node	*aux;
 
-	aux = stack->head;
-	if (!stack)
+	if (!stack && !stack->head)
 		return (1);
-	while(aux->next)
+	aux = stack->head;
+	while(aux && aux->next)
 	{
 		if (aux->value > aux->next->value)
 			return (0);
@@ -77,6 +77,7 @@ void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 	}
 	if ((*stack_a)->size == 3)
 		sort3(stack_a);
+	print_stack((*stack_b)->head);
 	while((*stack_b)->size)
 	{
 		nodes_init_b(*stack_a, *stack_b);

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:43:19 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/23 16:49:59 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:03:34 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ t_node	*create_node(int value)
 {
 	t_node	*new;
 
-	new = malloc(sizeof(t_node));
+	new = ft_calloc(1, sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->value = value;
-	new->max_value = 0;
-	new->next = NULL;
 	return (new);
 }
 
