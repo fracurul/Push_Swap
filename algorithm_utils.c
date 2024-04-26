@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/24 17:18:32 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:55:20 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 			}
 			current_b = current_b->next;
 		}
-		if (match < INT_MIN)
+		if (match == LONG_MIN)
 			aux_a->target_node = find_max(stack_b);
 		aux_a = aux_a->next;
 	}
@@ -93,7 +93,7 @@ void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 		if (!(aux_a->abv_avg))
 			aux_a->push_cost = size_a - (aux_a->max_value);
 		if (aux_a->target_node->abv_avg)
-			aux_a->push_cost = aux_a->target_node->max_value;
+			aux_a->push_cost += aux_a->target_node->max_value;
 		else
 			aux_a->push_cost += size_a
 				- (aux_a->target_node->max_value);
@@ -109,17 +109,17 @@ void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 
 void	set_cheapest(t_stack *stack)
 {
-	int		cheapest_value;
+	long		cheapest_value;
 	t_node	*cheapest_node;
 	t_node	*aux;
 
 	aux = stack->head;
 	if (!aux)
 		return ;
-	cheapest_value = INT_MIN;
+	cheapest_value = LONG_MAX;
 	while (aux->next)
 	{
-		if (aux->push_cost > cheapest_value)
+		if ((long)aux->push_cost < cheapest_value)
 		{
 			cheapest_value = aux->push_cost;
 			cheapest_node = aux;
@@ -131,18 +131,21 @@ void	set_cheapest(t_stack *stack)
 
 void	get_node_push(t_stack **stack, t_node *top_node, int n)
 {
-	if (n == 1)
+	while((*stack)->head != top_node)
 	{
-		if (top_node->abv_avg)
-			ra_mov(stack);
-		else
-			rra_mov(stack);
-	}
-	else if (n == 2)
-	{
-		if (top_node->abv_avg)
-			rb_mov(stack);
-		else
-			rrb_mov(stack);
+		if (n == 1)
+		{
+			if (top_node->abv_avg)
+				ra_mov(stack);
+			else
+				rra_mov(stack);
+		}
+		else if (n == 2)
+		{
+			if (top_node->abv_avg)
+				rb_mov(stack);
+			else
+				rrb_mov(stack);
+		}
 	}
 }
