@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:13 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/26 15:45:33 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:14:29 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,6 @@ int	main(int argc, char **argv)
 			else
 				sort_stacks(&stack_a, &stack_b);
 		}
-		/*pb_mov(&stack_a, &stack_b);
-		pb_mov(&stack_a, &stack_b);
-		rb_mov(&stack_b);
-		print_stack(stack_b->head);
-		print_stack(stack_a->head);
-		pa_mov(&stack_a, &stack_b);
-		pa_mov(&stack_a, &stack_b);
-		ra_mov(&stack_a);
-		print_stack(stack_a->head);*/
-		//print_stack(stack_b->head);
 		delete_stack(stack_a);
 	}
 	return (0);
