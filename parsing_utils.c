@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:24:40 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/30 16:38:51 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:16:00 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,15 @@ int	ft_nbrcmp(const char *s1, const char *s2)
 		return (0);
 	while(*s2 == '0')
 		s2++;
-	while ((*s1 == *s2))
+	if (*s1 == *s2)
+		return (0);
+	/*while ((*s1 == *s2))
 	{
 		if (*s1 != *s2)
 			return (1);
 		s1++;
 		s2++;
-	}
+	}*/
 	return (ft_strcmp(s1, s2));
 }
 
