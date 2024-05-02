@@ -6,12 +6,46 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:53:31 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/26 13:36:05 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:14:10 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * @brief find the node with max value.
+ *
+ * @param stack
+ * @return t_stack node with the max value.
+ */
+t_node	*find_max(t_stack *stack)
+{
+	int		max;
+	t_node	*max_node;
+	t_node	*aux;
+
+	if (!stack)
+		return (NULL);
+	max = INT_MIN;
+	aux = stack->head;
+	while (aux)
+	{
+		if (aux->value > max)
+		{
+			max = aux->value;
+			max_node = aux;
+		}
+		aux = aux->next;
+	}
+	return (max_node);
+}
+
+/**
+ * @brief find the node with min value.
+ *
+ * @param stack
+ * @return t_stack node with the min value.
+ */
 t_node	*find_min(t_stack *stack)
 {
 	int		min;
@@ -48,34 +82,25 @@ t_node	*get_cheapest(t_stack *stack)
 	}
 	return (NULL);
 }
-void	r_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest)
+
+/**
+ * @brief Get the max value object.
+ *
+ * @param stack
+ * @return int with the max value.
+ */
+int	get_max_value(t_stack *stack)
 {
-	t_node	*aux_a;
-	t_node	*aux_b;
+	int		max_value;
+	t_node *current;
 
-	aux_a = (*stack_a)->head;
-	aux_b = (*stack_b)->head;
-	while ((*stack_b)->head != cheapest->target_node && (*stack_a)->head != cheapest)
+	current = stack->head;
+	max_value = current->max_value;
+	while(current)
 	{
-		rr_mov(stack_a, stack_b);
+		if(current->value > max_value)
+			max_value = current->value;
+		current = current->next;
 	}
-	current_average(*stack_a);
-	current_average(*stack_b);
-}
-
-void	rr_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest)
-{
-	t_node	*aux_a;
-	t_node	*aux_b;
-
-	aux_a = (*stack_a)->head;
-	aux_b = (*stack_b)->head;
-	while ((*stack_b)->head != cheapest->target_node && (*stack_a)->head != cheapest)
-	{
-		rrr_mov(stack_a, stack_b);
-		// aux_a = aux_a->next;
-		// aux_b = aux_b->next;
-	}
-	current_average(*stack_a);
-	current_average(*stack_b);
+	return (max_value);
 }

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:33 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/23 17:35:09 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:09:09 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	delete_stack(t_stack *stack)
 	while(current)
 	{
 		aux = current->next;
-		delete_node(current);
+		free(current);
 		current = aux;
 	}
 	stack->head = NULL;
@@ -78,32 +78,33 @@ int	stack_size(t_stack *stack)
 		aux = aux->next;
 		size++;
 	}
+	size++;
 	return (size);
 }
 /**
- * @brief find the max value.
+ * @brief put the node want to move at the top of the stack.
  *
- * @param stack
- * @return t_stack
+ * @param stack stack we've.
+ * @param top_node nod we want to be 1st.
+ * @param n flag to choose the stack we want.
  */
-t_node	*find_max(t_stack *stack)
+void	get_node_push(t_stack **stack, t_node *top_node, int n)
 {
-	int		max;
-	t_node	*max_node;
-	t_node	*aux;
-
-	if (!stack)
-		return (NULL);
-	max = INT_MIN;
-	aux = stack->head;
-	while (aux)
+	while((*stack)->head != top_node)
 	{
-		if (aux->value > max)
+		if (n == 1)
 		{
-			max = aux->value;
-			max_node = aux;
+			if (top_node->abv_avg)
+				ra_mov(stack);
+			else
+				rra_mov(stack);
 		}
-		aux = aux->next;
+		else if (n == 2)
+		{
+			if (top_node->abv_avg)
+				rb_mov(stack);
+			else
+				rrb_mov(stack);
+		}
 	}
-	return (max_node);
 }

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:28 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/26 15:52:13 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:18:05 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,39 @@ void	min_to_top(t_stack **stack_a)
 	}
 }
 
-void	nodes_init_a(t_stack *stack_a, t_stack *stack_b)
+void	set_target_b(t_stack *stack_a, t_stack *stack_b)
 {
-	current_average(stack_a);
-	current_average(stack_b);
-	set_target_a(stack_a, stack_b);
-	cost_analysis(stack_a, stack_b);
-	set_cheapest(stack_a);
+	t_node	*current_a;
+	t_node	*aux_b;
+	long	match;
+
+	aux_b = stack_b->head;
+	while (aux_b)
+	{
+		match = LONG_MAX;
+		current_a = stack_a->head;
+		while (current_a)
+		{
+			if (current_a->value > aux_b->value
+				&& (long)current_a->value < match)
+			{
+				match = current_a->value;
+				aux_b->target_node = current_a;
+			}
+			current_a = current_a->next;
+		}
+		if (match > INT_MAX)
+			aux_b->target_node = find_min(stack_a);
+		aux_b = aux_b->next;
+	}
 }
 
-void	nodes_init_b(t_stack *stack_a, t_stack *stack_b)
+int	matrix_size(char **argv)
 {
-	current_average(stack_a);
-	current_average(stack_b);
-	set_target_b(stack_a, stack_b);
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+		;
+	return (i);
 }

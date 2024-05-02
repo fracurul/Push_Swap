@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:04 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/22 17:14:42 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:18:39 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,42 @@ void				rr_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest);
 int					ft_parse_checker(int argc, char **argv);
 int					ft_split_checker(int argc, char **argv);
 int					*ft_parsing(int argc, char **argv);
+// algorithm //
+int					is_sorted(t_stack *stack);
+void				stack_limits(int *min, int *max, t_node *node);
+void				sort_three(t_stack **stack);
+void				sort_stacks(t_stack **stack_a, t_stack **stack_b);
 // utils //
 //-> parsing utils.
 long				ft_atol(const char *str);
 int					ft_isnbr(char *s);
-int					ft_nbrcmp(const char *s1, const char *s2);
 int					ft_isdup(char **argv);
-void				ft_del_matrix(char **str);
 //-> node utils.
 t_node				*create_node(int value);
-void				node_to_head(t_stack *stack, t_node *node);
 void				node_to_tail(t_stack *stack, t_node *node);
-void				delete_node(t_node *node);
+void				nodes_init_a(t_stack *stack_a, t_stack *stack_b);
+void				nodes_init_b(t_stack *stack_a, t_stack *stack_b);
+void				array_free(char **array);
 //-> stack utils.
 void				stack_init(t_stack *stack);
 void				stack_fill(t_stack *stack, int *parsing, int size);
 void				delete_stack(t_stack *stack);
-int					get_max_value(t_stack *stack);
-t_node				*get_cheapest(t_stack *stack);
 int					stack_size(t_stack *stack);
+void				get_node_push(t_stack **stack, t_node *top_node, int n);
+//->stack utils 2
+t_node				*find_max(t_stack *stack);
+t_node				*find_min(t_stack *stack);
+t_node				*get_cheapest(t_stack *stack);
+int					get_max_value(t_stack *stack);
 //->algorithm utils
 void				current_average(t_stack *stack);
 void				set_target_a(t_stack *stack_a, t_stack *stack_b);
-t_node				*find_max(t_stack *stack);
-t_node				*find_min(t_stack *stack);
 void				cost_analysis(t_stack *stack_a, t_stack *stack_b);
 void				set_cheapest(t_stack *stack);
-void				get_node_push(t_stack **stack, t_node *top_node, int n);
+//->algorithm utils 2
 void				move_to_b(t_stack **stack_a, t_stack **stack_b);
 void				move_to_a(t_stack **stack_a, t_stack **stack_b);
 void				min_to_top(t_stack **stack_a);
-void				nodes_init_a(t_stack *stack_a, t_stack *stack_b);
-void				nodes_init_b(t_stack *stack_a, t_stack *stack_b);
 void				set_target_b(t_stack *stack_a, t_stack *stack_b);
 int					matrix_size(char **argv);
-// algorithm //
-int					is_sorted(t_stack *stack);
-void				sort3(t_stack **stack);
-void				sort_stacks(t_stack **stack_a, t_stack **stack_b);
-void				print_stack(t_node *current);
 #endif

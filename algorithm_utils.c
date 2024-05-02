@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:22 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/26 15:55:20 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:53:50 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ void	set_target_a(t_stack *stack_a, t_stack *stack_b)
 		aux_a = aux_a->next;
 	}
 }
+
+/**
+ * @brief calculate the max input.
+ *
+ * @param a 1st value.
+ * @param b 2nd value.
+ * @return int max output.
+ */
+static int	mx(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
+}
 /**
  * @brief calculate pus_cost for each stack_a node.
  *
@@ -83,20 +97,24 @@ void	cost_analysis(t_stack *stack_a, t_stack *stack_b)
 	int		size_a;
 	int		size_b;
 	t_node	*aux_a;
+	int		t_idx;
+	int		a_idx;
 
-	size_a = stack_a->size;
-	size_b = stack_b->size;
+	size_a = stack_size(stack_a);
+	size_b = stack_size(stack_b);
 	aux_a = stack_a->head;
 	while (aux_a)
 	{
-		aux_a->push_cost = aux_a->max_value;
-		if (!(aux_a->abv_avg))
-			aux_a->push_cost = size_a - (aux_a->max_value);
-		if (aux_a->target_node->abv_avg)
-			aux_a->push_cost += aux_a->target_node->max_value;
+		a_idx = aux_a->max_value;
+		t_idx = aux_a->target_node->max_value;
+		if (aux_a->abv_avg  && (aux_a->target_node->abv_avg || t_idx - a_idx < (size_b + 1) / 2))
+			aux_a->push_cost = mx(a_idx, t_idx);
+		else if (!aux_a->abv_avg && (!aux_a->target_node->abv_avg || t_idx + size_a - a_idx > (size_b + 1) / 2))
+			aux_a->push_cost = mx(size_a - a_idx + 1, size_b - t_idx + 1);
+		else if (aux_a->abv_avg)
+			aux_a->push_cost = a_idx + (size_b - t_idx +1);
 		else
-			aux_a->push_cost += size_a
-				- (aux_a->target_node->max_value);
+			aux_a->push_cost = (size_a - a_idx + 1) + t_idx;
 		aux_a = aux_a->next;
 	}
 }
@@ -127,25 +145,4 @@ void	set_cheapest(t_stack *stack)
 		aux = aux->next;
 	}
 	cheapest_node->cheapest = 1;
-}
-
-void	get_node_push(t_stack **stack, t_node *top_node, int n)
-{
-	while((*stack)->head != top_node)
-	{
-		if (n == 1)
-		{
-			if (top_node->abv_avg)
-				ra_mov(stack);
-			else
-				rra_mov(stack);
-		}
-		else if (n == 2)
-		{
-			if (top_node->abv_avg)
-				rb_mov(stack);
-			else
-				rrb_mov(stack);
-		}
-	}
 }

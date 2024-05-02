@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:24:40 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/30 17:16:00 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:40:23 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,40 +68,6 @@ int	ft_isnbr(char *s)
 }
 
 /**
- * @brief compare values
- *
- * @param s1 1st value.
- * @param s2 2nd value.
- * @return int 0 means same value.
- */
-int	ft_nbrcmp(const char *s1, const char *s2)
-{
-
-	while (*s1 && (*s1 == '+' || *s1 == '-'))
-		s1++;
-	if (!s1)
-		return (0);
-	while(*s1 == '0')
-		s1++;
-	while (s2 && (*s2 == '+' || *s2 == '-'))
-		s2++;
-	if (!s2)
-		return (0);
-	while(*s2 == '0')
-		s2++;
-	if (*s1 == *s2)
-		return (0);
-	/*while ((*s1 == *s2))
-	{
-		if (*s1 != *s2)
-			return (1);
-		s1++;
-		s2++;
-	}*/
-	return (ft_strcmp(s1, s2));
-}
-
-/**
  * @brief check for duplicate values.
  *
  * @param argv list of values.
@@ -118,23 +84,11 @@ int	ft_isdup(char **argv)
 		j = i + 1;
 		while(argv[j])
 		{
-			if (ft_nbrcmp(argv[i], argv[j]) == 0)
+			if (ft_atol(argv[i]) == ft_atol(argv[j]))
 				return (0);
 			j++;
 		}
 		i++;
 	}
 	return (1);
-}
-
-void	ft_del_matrix(char **str)
-{
-	int	i;
-
-	i = -1;
-	if (!str)
-		return ;
-	while (str[++i])
-		free(str[i]);
-	free(str);
 }

@@ -6,7 +6,7 @@
 #    By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 18:17:19 by fracurul          #+#    #+#              #
-#    Updated: 2024/03/26 19:20:58 by fracurul         ###   ########.fr        #
+#    Updated: 2024/05/02 13:45:58 by fracurul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 #########################################
 
 PUSH_SWAP = push_swap
+CHECKER = checker
 LIBFT = libft/libft.a
 SRC_LIBFT = libft/
 
@@ -46,8 +47,6 @@ OBJ = $(SRC:.c=.o)
 
 OBJBONUS = $(SRCBONUS:.c=.o)
 
-DEP = $(addsufix .d, $(basename $(SRC)))
-
 #########################################
 #            CLEAN FUNCTION             #
 #########################################
@@ -69,14 +68,17 @@ $(PUSH_SWAP) : $(OBJ)
 	@echo "#         Compiling Push_swap..         #"
 	@echo "#########################################"
 	@$(MAKE) -C $(SRC_LIBFT)
-	@$(CC) -I ./ $(FLAGS) $(OBJ) $(LIBFT) -o $@
+	@$(CC) $(FLAGS) $(OBJ) -o $(PUSH_SWAP) -L ./libft -lft
 
 #########################################
 #             COMPILE BONUS             #
 #########################################
 
-bonus :$(OBJBONUS)
-	$(PUSH_SWAP) $(OBJBONUS) $(LIBFT)
+bonus : $(OBJBONUS) $(OBJ)
+	@echo "#########################################"
+	@echo "#      Compiling BONUS Push_swap..      #"
+	@echo "#########################################"
+	@$(CC) $(FLAGS) $(OBJBONUS) $(OBJ) -o $(CHECKER) -L ./libft -lft
 
 #########################################
 #           COMPILE .c to .o            #
@@ -92,17 +94,16 @@ bonus :$(OBJBONUS)
 #########################################
 
 clean:
-	@$(MAKE) -C $(SRC_LIBFT) clean
+	@$(MAKE) clean -C $(SRC_LIBFT)
 	@$(CLEAN) $(OBJ) $(OBJBONUS)
-	@$(CLEAN) *.d
 	@echo "files deleted"
 
 #########################################
 #              DELETE ALL               #
 #########################################
 fclean : clean
-	@$(MAKE) -C $(SRC_LIBFT) fclean
-	@$(CLEAN) $(PUSH_SWAP)
+	@$(MAKE) fclean -C $(SRC_LIBFT)
+	@$(CLEAN) $(PUSH_SWAP) $(CHECKER)
 	@echo "program deleted"
 
 #########################################

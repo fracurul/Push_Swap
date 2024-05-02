@@ -6,35 +6,44 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:13 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/26 17:14:29 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:52:05 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-#include <stdio.h>
-
-void	print_stack(t_node *current)
+static void	free_stack(t_stack **stack)
 {
-	while (current)
+	t_stack	*node;
+	t_stack	*tmp;
+	if (!(*stack))
+		return ;
+	node = *stack;
+	tmp = node;
+	while (node->head)
 	{
-		printf("valor del nodo:%d|\n ", current->value);
-		// printf("mediana%d |", current->abv_avg);
-		// printf("index %d |", current->max_value);
-		// printf("coste%d |", current->push_cost);
-		// if (current->target_node)
-		// 	printf("target node %d |\n", current->target_node->value);
-		// printf("cheapest %d\n", current->cheapest);
-		current = current->next;
+		tmp->head = node->head->next;
+		node->head->value = 0;
+		node->head->max_value = 0;
+		node->head->push_cost = 0;
+		node->head->abv_avg = 0;
+		node->head->cheapest = 0;
+		if (node->head->target_node)
+			node->head->target_node = NULL;
+		free(node->head);
+		node = tmp;
 	}
-	printf("\n");
+	if (node)
+		free(node);
+	*stack = NULL;
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	char	**argv_cpy;
 	int		i;
 
 	stack_a = malloc(sizeof(t_stack));
@@ -50,8 +59,9 @@ int	main(int argc, char **argv)
 			return (write(2, "Error\n", 6), 1);
 		else if (argc == 2)
 		{
-			argv = ft_split(argv[1], ' ');
+			argv_cpy = ft_split(argv[1], ' ');
 			stack_fill(stack_a, ft_parsing(0, argv), matrix_size(argv));
+			array_free(argv_cpy);
 		}
 		if	(argc > 2)
 		{
@@ -62,11 +72,13 @@ int	main(int argc, char **argv)
 			if(stack_a->size == 2)
 				sa_mov(&stack_a);
 			else if (stack_a->size == 3)
-				sort3(&stack_a);
+				sort_three(&stack_a);
 			else
 				sort_stacks(&stack_a, &stack_b);
 		}
 		delete_stack(stack_a);
 	}
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }

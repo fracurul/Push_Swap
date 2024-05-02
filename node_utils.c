@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:43:19 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/24 20:03:34 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:17:32 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ t_node	*create_node(int value)
 		return (NULL);
 	new->value = value;
 	return (new);
-}
-
-/**
- * @brief moves a node at the top of the stack.
- *
- * @param stack target.
- * @param node value we need to move.
- */
-void	node_to_head(t_stack *stack, t_node *node)
-{
-	if(!node || !stack)
-		return ;
-	if (!stack->head)
-			stack->head = node;
-	else
-		node->next = stack->head;
-		stack->head = node;
-		stack->size++;
 }
 
 /**
@@ -71,7 +53,28 @@ void	node_to_tail(t_stack *stack, t_node *node)
 	stack->size++;
 }
 
-void	delete_node(t_node *node)
+void	nodes_init_a(t_stack *stack_a, t_stack *stack_b)
 {
-	free (node);
+	current_average(stack_a);
+	current_average(stack_b);
+	set_target_a(stack_a, stack_b);
+	cost_analysis(stack_a, stack_b);
+	set_cheapest(stack_a);
+}
+
+void	nodes_init_b(t_stack *stack_a, t_stack *stack_b)
+{
+	current_average(stack_a);
+	current_average(stack_b);
+	set_target_b(stack_a, stack_b);
+}
+
+void	array_free(char **array)
+{
+	int	i;
+
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
 }

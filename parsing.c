@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:31:48 by fracurul          #+#    #+#             */
-/*   Updated: 2024/04/05 18:11:48 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:44:43 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ int	ft_split_checker(int argc, char **argv)
 		spld_values = ft_split(argv[1], ' ');
 		parsed_values = ft_parsing(0, spld_values);
 		if (!spld_values || !parsed_values)
-			return (ft_del_matrix(spld_values), free(parsed_values), 0);
+			return (array_free(spld_values), free(parsed_values), 0);
 		while (spld_values[++i])
 		{
 			if (!ft_isnbr(spld_values[i]))
-				return (ft_del_matrix(spld_values), free(parsed_values), 0);
+				return (array_free(spld_values), free(parsed_values), 0);
 		}
 		if (!ft_isdup(spld_values))
-			return (ft_del_matrix(spld_values), free(parsed_values), 0);
-		return(ft_del_matrix(spld_values), free(parsed_values), 1);
+			return (array_free(spld_values), free(parsed_values), 0);
+		return(array_free(spld_values), free(parsed_values), 1);
 	}
 	return (ft_parse_checker(argc, argv));
 }
