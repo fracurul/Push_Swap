@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:16 by fracurul          #+#    #+#             */
-/*   Updated: 2024/05/02 16:14:46 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:31:18 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,18 @@ void	sort_stacks(t_stack **stack_a, t_stack **stack_b)
 	}
 	current_average(*stack_a);
 	min_to_top(stack_a);
+}
+
+void	ps_algorithm(t_stack *stack_a, t_stack *stack_b)
+{
+	if (!is_sorted(stack_a))
+		{
+			if(stack_a->size == 2)
+				sa_mov(&stack_a);
+			else if (stack_a->size == 3)
+				sort_three(&stack_a);
+			else
+				sort_stacks(&stack_a, &stack_b);
+		}
+		delete_stack(stack_a);
 }

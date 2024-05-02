@@ -6,7 +6,7 @@
 #    By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 18:17:19 by fracurul          #+#    #+#              #
-#    Updated: 2024/05/02 13:45:58 by fracurul         ###   ########.fr        #
+#    Updated: 2024/05/02 16:33:23 by fracurul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 SRC = swap_movements.c rotate_movements.c reverse_rotate_movements.c push_movements.c \
 push_swap.c parsing.c parsing_utils.c node_utils.c stack_utils.c stack_utils2.c \
-algorithm.c algorithm_utils.c algorithm_utils2.c algorithm_utils3.c \
+algorithm.c algorithm_utils.c algorithm_utils2.c \
 
 #########################################
 #               OBJECTS                 #

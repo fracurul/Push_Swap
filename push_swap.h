@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:04 by fracurul          #+#    #+#             */
-/*   Updated: 2024/05/02 16:18:39 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:48:38 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void				rr_both(t_stack **stack_a, t_stack **stack_b, t_node *cheapest);
 int					ft_parse_checker(int argc, char **argv);
 int					ft_split_checker(int argc, char **argv);
 int					*ft_parsing(int argc, char **argv);
+int					check_parameters(int argc, char **argv, t_stack *stack_a);
 // algorithm //
 int					is_sorted(t_stack *stack);
 void				stack_limits(int *min, int *max, t_node *node);
 void				sort_three(t_stack **stack);
 void				sort_stacks(t_stack **stack_a, t_stack **stack_b);
+void				ps_algorithm(t_stack *stack_a, t_stack *stack_b);
 // utils //
 //-> parsing utils.
 long				ft_atol(const char *str);
