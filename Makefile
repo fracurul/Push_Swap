@@ -6,7 +6,7 @@
 #    By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 18:17:19 by fracurul          #+#    #+#              #
-#    Updated: 2024/05/02 16:33:23 by fracurul         ###   ########.fr        #
+#    Updated: 2024/05/03 18:32:35 by fracurul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC = gcc
 #           COMPILATOR FLAGS            #
 #########################################
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g 
 
 #########################################
 #           LIB FUNCTIONS               #

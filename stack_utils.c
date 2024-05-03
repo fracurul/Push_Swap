@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:33 by fracurul          #+#    #+#             */
-/*   Updated: 2024/05/02 16:09:09 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:32:49 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ int	stack_size(t_stack *stack)
 	aux = stack->head;
 	if (!stack)
 		return (0);
-	while(stack && aux->next)
+	while(stack && aux)
 	{
 		aux = aux->next;
 		size++;
 	}
-	size++;
 	return (size);
 }
 /**

@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:17:13 by fracurul          #+#    #+#             */
-/*   Updated: 2024/05/02 17:28:11 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:21:49 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	free_stack(t_stack **stack)
 		node->head->abv_avg = 0;
 		node->head->cheapest = 0;
 		if (node->head->target_node)
-			node->head->target_node = NULL;
+			free(node->head->target_node);
 		free(node->head);
 		node = tmp;
 	}
 	if (node)
 		free(node);
-	*stack = NULL;
+	
 }
 
 int	main(int argc, char **argv)

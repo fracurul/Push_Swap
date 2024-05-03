@@ -6,7 +6,7 @@
 /*   By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 18:49:16 by fracurul          #+#    #+#             */
-/*   Updated: 2024/05/02 16:31:18 by fracurul         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:39:31 by fracurul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void	ps_algorithm(t_stack *stack_a, t_stack *stack_b)
 			else
 				sort_stacks(&stack_a, &stack_b);
 		}
-		delete_stack(stack_a);
+	delete_stack(stack_a);
+	delete_stack(stack_b);
 }
