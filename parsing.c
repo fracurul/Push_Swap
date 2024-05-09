@@ -117,8 +117,8 @@ int	check_parameters(int argc, char **argv, t_stack *stack_a)
 		else if (argc == 2)
 		{
 			argv_cpy = ft_split(argv[1], ' ');
-			values = ft_parsing(0, argv);
-			stack_fill(stack_a, values, matrix_size(argv));
+			values = ft_parsing(0, argv_cpy);
+			stack_fill(stack_a, values, matrix_size(argv_cpy));
 			array_free(argv_cpy);
 		}
 		if	(argc > 2)

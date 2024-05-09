@@ -6,7 +6,7 @@
 #    By: fracurul <fracurul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 18:17:19 by fracurul          #+#    #+#              #
-#    Updated: 2024/05/03 18:32:35 by fracurul         ###   ########.fr        #
+#    Updated: 2024/05/09 11:54:25 by fracurul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@
 #########################################
 
 PUSH_SWAP = push_swap
-CHECKER = checker
 LIBFT = libft/libft.a
 SRC_LIBFT = libft/
 
@@ -29,7 +28,7 @@ CC = gcc
 #           COMPILATOR FLAGS            #
 #########################################
 
-FLAGS = -Wall -Wextra -Werror -g 
+FLAGS = -Wall -Wextra -Werror
 
 #########################################
 #           LIB FUNCTIONS               #
@@ -45,7 +44,7 @@ algorithm.c algorithm_utils.c algorithm_utils2.c \
 
 OBJ = $(SRC:.c=.o)
 
-OBJBONUS = $(SRCBONUS:.c=.o)
+#OBJBONUS = $(SRCBONUS:.c=.o)
 
 #########################################
 #            CLEAN FUNCTION             #
@@ -71,16 +70,6 @@ $(PUSH_SWAP) : $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) -o $(PUSH_SWAP) -L ./libft -lft
 
 #########################################
-#             COMPILE BONUS             #
-#########################################
-
-bonus : $(OBJBONUS) $(OBJ)
-	@echo "#########################################"
-	@echo "#      Compiling BONUS Push_swap..      #"
-	@echo "#########################################"
-	@$(CC) $(FLAGS) $(OBJBONUS) $(OBJ) -o $(CHECKER) -L ./libft -lft
-
-#########################################
 #           COMPILE .c to .o            #
 #########################################
 
@@ -95,7 +84,7 @@ bonus : $(OBJBONUS) $(OBJ)
 
 clean:
 	@$(MAKE) clean -C $(SRC_LIBFT)
-	@$(CLEAN) $(OBJ) $(OBJBONUS)
+	@$(CLEAN) $(OBJ)
 	@echo "files deleted"
 
 #########################################
@@ -103,7 +92,7 @@ clean:
 #########################################
 fclean : clean
 	@$(MAKE) fclean -C $(SRC_LIBFT)
-	@$(CLEAN) $(PUSH_SWAP) $(CHECKER)
+	@$(CLEAN) $(PUSH_SWAP)
 	@echo "program deleted"
 
 #########################################
@@ -112,4 +101,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all bonus re clean fclean
+.PHONY: all re clean fclean
